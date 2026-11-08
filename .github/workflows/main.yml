@@ -5,7 +5,8 @@ env:
   KERNEL_REPO: https://github.com/plmzaq2112/android_kernel_mt6765.git
   KERNEL_BRANCH: 4.19.325-purity
   DEFCONFIG: blossom_defconfig
-  CLANG_REPO: https://github.com/LineageOS/android_prebuilts_clang_kernel_linux-x86_clang-r383902
+  CLANG_REPO: https://github.com/LineageOS/android_prebuilts_clang_kernel_linux-x86_clang-r416183b
+
 
 jobs:
   build:
