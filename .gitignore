@@ -1,0 +1,7 @@
+out/
+artifacts/
+kernel/
+clang/
+*.o
+*.cmd
+*.img

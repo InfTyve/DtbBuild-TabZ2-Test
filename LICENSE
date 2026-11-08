@@ -1,0 +1,10 @@
+GPL-2.0
+
+本仓库中的内核配置文件（configs/）提取自 Linux 内核构建产物，
+脚本（scripts/）与流水线定义（.github/）由本仓库作者编写，
+整体以 GNU General Public License v2.0 发布。
+
+许可证全文：https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
+prebuilt/dtb 与 prebuilt/ramdisk.gz 来自设备原厂固件，
+仅用于该设备的系统构建与恢复，版权归原始厂商所有。
