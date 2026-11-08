@@ -7,7 +7,6 @@ env:
   DEFCONFIG: blossom_defconfig
   CLANG_REPO: https://github.com/LineageOS/android_prebuilts_clang_kernel_linux-x86_clang-r416183b
 
-
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -27,6 +26,17 @@ jobs:
         run: git clone --depth=1 -b "$KERNEL_BRANCH" "$KERNEL_REPO" kernel
       - name: Clone clang
         run: git clone --depth=1 "$CLANG_REPO" clang
+      - name: Patch for clang14
+        working-directory: kernel
+        run: |
+          sed -i '/-ignore-tti-inline-compatible/d' Makefile
+          sed -i '/-inline-instr-cost=8/d' Makefile
+          sed -i '/-inline-call-penalty=8/d' Makefile
+          sed -i '/-inline-enable-cost-benefit-analysis/d' Makefile
+          sed -i 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' arch/arm64/configs/$DEFCONFIG
+          sed -i 's/^CONFIG_POLLY_CLANG=y/# CONFIG_POLLY_CLANG is not set/' arch/arm64/configs/$DEFCONFIG
+          echo "remain mllvm: $(grep -c -- -mllvm Makefile)"
+          grep -E 'LTO_CLANG|POLLY_CLANG' arch/arm64/configs/$DEFCONFIG
       - name: Build
         working-directory: kernel
         run: |
